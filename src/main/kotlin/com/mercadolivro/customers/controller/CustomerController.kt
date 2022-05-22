@@ -33,7 +33,7 @@ class CustomerController(
     }
 
     @GetMapping("/{id}")
-    fun getCustomerById(@PathVariable id : String) : ResponseEntity<Customer> {
+    fun getCustomerById(@PathVariable id : Int) : ResponseEntity<Customer> {
         return ResponseEntity(customerService.getCustomerById(id), HttpStatus.OK)
     }
 

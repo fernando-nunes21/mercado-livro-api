@@ -32,11 +32,20 @@ class BookService(
     }
 
     fun editBook(id: Int, book: Book) {
-
+        if(bookRepository.existsById(id)){
+            book.id = id
+            bookRepository.save(book)
+        } else {
+            throw Exception("Book id was not found on DB")
+        }
     }
 
     fun deleteBook(id: Int) {
-
+        if(bookRepository.existsById(id)){
+            bookRepository.deleteById(id)
+        } else {
+            throw Exception("Book id was not found on DB")
+        }
     }
 
 }

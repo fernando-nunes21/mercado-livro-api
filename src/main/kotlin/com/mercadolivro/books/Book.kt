@@ -5,7 +5,7 @@ import com.mercadolivro.customers.Customer
 import java.math.BigDecimal
 import javax.persistence.*
 
-@Entity
+@Entity(name = "Books")
 data class Book(
 
     @Id
