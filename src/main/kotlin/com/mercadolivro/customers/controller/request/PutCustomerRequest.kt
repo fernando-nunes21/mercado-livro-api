@@ -1,6 +1,7 @@
 package com.mercadolivro.customers.controller.request
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.mercadolivro.customers.enums.CustomerStatus
 
 data class PutCustomerRequest(
     var name : String,
@@ -9,6 +10,7 @@ data class PutCustomerRequest(
     var location : String,
 
     @JsonProperty("payment_type")
-    var paymentType : String
+    var paymentType : String,
+    var status : CustomerStatus
 ) {
 }

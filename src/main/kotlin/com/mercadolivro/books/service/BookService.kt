@@ -32,14 +32,18 @@ class BookService(
         return bookRepository.findAllActiveBooks(limit, offset)
     }
 
+    fun getAllBooksByCustomerId(customerId: Int) : List<Book> {
+        return bookRepository.findAllBooksByCustomerId(customerId)
+    }
+
     fun createBook(book : Book) {
         bookRepository.save(book)
     }
 
     fun editBook(id: Int, book: Book) {
         if(bookRepository.existsById(id)){
-            book.id = id
-            bookRepository.save(book)
+            val previousBook = getBookById(id)
+            bookRepository.save(buildBookToSave(previousBook, book))
         } else {
             throw Exception("Book id was not found on DB")
         }
@@ -53,6 +57,16 @@ class BookService(
         } else {
             throw Exception("Book id was not found on DB")
         }
+    }
+
+    private fun buildBookToSave(previousBook: Book, newBook: Book) : Book {
+        return Book(
+            id = newBook.id ?: previousBook.id,
+            name = newBook.name ?: previousBook.name,
+            price = newBook.price ?: previousBook.price,
+            status = newBook.status ?: previousBook.status,
+            customer = newBook.customer ?: previousBook.customer
+        )
     }
 
 }

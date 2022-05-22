@@ -1,13 +1,17 @@
 package com.mercadolivro.customers.service
 
+import com.mercadolivro.books.service.BookService
 import com.mercadolivro.customers.Customer
+import com.mercadolivro.customers.enums.CustomerStatus
 import com.mercadolivro.customers.repository.CustomerRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import javax.persistence.Id
 
 @Service
 class CustomerService(
-    val customerRepository: CustomerRepository
+    val customerRepository: CustomerRepository,
+    val bookService: BookService
 ) {
 
     fun getCustomers(name: String?, offset: Int, limit: Int) : List<Customer> {
@@ -33,10 +37,8 @@ class CustomerService(
 
     fun editCustomer(id : String, customer : Customer){
         if (customerRepository.existsById(id.toInt())){
-            val customerToSave = Customer(
-                id.toInt(), customer.name, customer.age, customer.email, customer.location, customer.paymentType
-            )
-            customerRepository.save(customerToSave)
+            val previousCustomer = getCustomerById(id.toInt())
+            customerRepository.save(buildCustomerToSave(previousCustomer, customer))
         } else {
             throw Exception("Customer not found by informed id")
         }
@@ -44,9 +46,30 @@ class CustomerService(
 
     fun deleteCustomer(id : String) {
         if (customerRepository.existsById(id.toInt())){
-            customerRepository.deleteById(id.toInt())
+            val customer = getCustomerById(id.toInt())
+            customer.status = CustomerStatus.INACTIVE
+            deletedAllCustomersBooks(customer.id!!)
+            customerRepository.save(customer)
         } else {
             throw Exception("Customer not found by informed id")
+        }
+    }
+
+    private fun buildCustomerToSave(previousCustomer: Customer, newCustomer: Customer) : Customer {
+        return Customer(
+            id = newCustomer.id ?: previousCustomer.id,
+            name = newCustomer.name ?: previousCustomer.name ,
+            age = newCustomer.age ?: previousCustomer.age,
+            email = newCustomer.email ?: previousCustomer.email,
+            location = newCustomer.location ?: previousCustomer.location,
+            paymentType = newCustomer.paymentType ?: previousCustomer.paymentType
+        )
+    }
+
+    private fun deletedAllCustomersBooks(customerId: Int) {
+        val books = bookService.getAllBooksByCustomerId(customerId)
+        books.forEach{
+            bookService.deleteBook(it.id!!)
         }
     }
 }

@@ -13,10 +13,10 @@ data class Book(
     var id: Int? = null,
 
     @Column
-    var name: String,
+    var name: String?,
 
     @Column
-    var price: BigDecimal,
+    var price: BigDecimal?,
 
     @Column
     @Enumerated(EnumType.STRING)

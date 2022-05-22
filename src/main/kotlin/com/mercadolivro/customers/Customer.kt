@@ -1,10 +1,7 @@
 package com.mercadolivro.customers
 
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import com.mercadolivro.customers.enums.CustomerStatus
+import javax.persistence.*
 
 @Entity(name = "Customers")
 data class Customer(
@@ -14,19 +11,23 @@ data class Customer(
     var id : Int? = null,
 
     @Column
-    var name : String,
+    var name : String?,
 
     @Column
-    var age : Int,
+    var age : Int?,
 
     @Column
-    var email : String,
+    var email : String?,
 
     @Column
-    var location : String,
+    var location : String?,
 
     @Column(name = "payment_type")
-    var paymentType : String
+    var paymentType : String?,
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    var status : CustomerStatus? = null
 
 ) {
 }
