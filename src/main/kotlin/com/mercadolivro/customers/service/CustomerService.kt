@@ -18,7 +18,7 @@ class CustomerService(
         }
     }
 
-    fun getCustomerById(id : String) : Customer {
+    fun getCustomerById(id: Int) : Customer {
         val customer = customerRepository.findByIdOrNull(id = id.toInt())
         if(customer != null) {
             return customer

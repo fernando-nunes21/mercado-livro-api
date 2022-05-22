@@ -10,6 +10,6 @@ interface CustomerRepository : CrudRepository<Customer, Int> {
     fun findByNameWithPagination(name: String, limit: Int, offset: Int) : List<Customer>
 
     @Query(value="SELECT * FROM Customers ORDER BY id limit ?1 offset ?2", nativeQuery = true)
-    fun findAllCustomersWithPagination(limit: Int, ofsset: Int) : List<Customer>
+    fun findAllCustomersWithPagination(limit: Int, offset: Int) : List<Customer>
 
 }
