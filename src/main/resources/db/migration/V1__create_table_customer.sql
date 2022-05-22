@@ -1,0 +1,8 @@
+create table Customers(
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    age INTEGER NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    location VARCHAR(255) NOT NULL,
+    payment_type VARCHAR(255) NOT NULL
+);
