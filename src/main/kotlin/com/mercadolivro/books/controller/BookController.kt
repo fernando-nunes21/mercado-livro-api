@@ -32,6 +32,14 @@ class BookController(
         return ResponseEntity(bookService.getBookById(id), HttpStatus.OK)
     }
 
+    @GetMapping("/active")
+    fun getBooksActive(
+        @RequestParam(required = true) limit: Int,
+        @RequestParam(required = true) offset: Int
+    ) : ResponseEntity<List<Book>> {
+        return ResponseEntity(bookService.getAllActiveBooks(limit, offset), HttpStatus.OK)
+    }
+
     @PostMapping
     fun createBook(@RequestBody request: PostBookRequest) : ResponseEntity<Any> {
         return ResponseEntity(

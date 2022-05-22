@@ -1,6 +1,7 @@
 package com.mercadolivro.books.service
 
 import com.mercadolivro.books.Book
+import com.mercadolivro.books.enums.BookStatus
 import com.mercadolivro.books.repository.BookRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
@@ -27,6 +28,10 @@ class BookService(
         }
     }
 
+    fun getAllActiveBooks(limit: Int, offset: Int) : List<Book>{
+        return bookRepository.findAllActiveBooks(limit, offset)
+    }
+
     fun createBook(book : Book) {
         bookRepository.save(book)
     }
@@ -42,7 +47,9 @@ class BookService(
 
     fun deleteBook(id: Int) {
         if(bookRepository.existsById(id)){
-            bookRepository.deleteById(id)
+            val book = bookRepository.findByIdOrNull(id)
+            book?.status = BookStatus.DELETED
+            bookRepository.save(book!!)
         } else {
             throw Exception("Book id was not found on DB")
         }

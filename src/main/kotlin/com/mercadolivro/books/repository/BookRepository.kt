@@ -12,4 +12,7 @@ interface BookRepository : CrudRepository<Book, Int> {
     @Query(value="SELECT * FROM Books ORDER BY id limit ?1 offset ?2", nativeQuery = true)
     fun findAllBooksWithPagination(limit: Int, offset: Int) : List<Book>
 
+    @Query(value="SELECT * FROM Books WHERE status = 'ACTIVE' ORDER BY id limit ?1 offset ?2", nativeQuery = true)
+    fun findAllActiveBooks(limit: Int, offset: Int) : List<Book>
+
 }
