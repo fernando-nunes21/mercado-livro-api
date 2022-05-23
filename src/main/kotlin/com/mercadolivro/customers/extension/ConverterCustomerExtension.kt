@@ -3,6 +3,7 @@ package com.mercadolivro.customers.extension
 import com.mercadolivro.customers.Customer
 import com.mercadolivro.customers.controller.request.PostCustomerRequest
 import com.mercadolivro.customers.controller.request.PutCustomerRequest
+import com.mercadolivro.customers.controller.response.CustomerResponse
 import com.mercadolivro.customers.enums.CustomerStatus
 
 fun PostCustomerRequest.toCustomer() : Customer {
@@ -26,3 +27,16 @@ fun PutCustomerRequest.toCustomer() : Customer {
         status = status
     )
 }
+
+fun Customer.toResponse() : CustomerResponse {
+    return CustomerResponse(
+        id = id,
+        name = name,
+        age = age,
+        email = email,
+        location = location,
+        paymentType = paymentType,
+        status = status
+    )
+}
+

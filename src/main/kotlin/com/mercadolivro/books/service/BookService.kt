@@ -3,6 +3,8 @@ package com.mercadolivro.books.service
 import com.mercadolivro.books.Book
 import com.mercadolivro.books.enums.BookStatus
 import com.mercadolivro.books.repository.BookRepository
+import com.mercadolivro.enums.ErrorCode
+import com.mercadolivro.exceptions.ElementNotFoundException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 
@@ -20,11 +22,8 @@ class BookService(
     }
 
     fun getBookById(id: Int) : Book{
-        val book = bookRepository.findByIdOrNull(id)
-        if(book != null) {
-            return book
-        } else {
-            throw Exception("Book id was not found")
+        return bookRepository.findById(id).orElseThrow {
+            ElementNotFoundException(ErrorCode.M0101.message, ErrorCode.M0101.errorCode)
         }
     }
 
@@ -45,7 +44,7 @@ class BookService(
             val previousBook = getBookById(id)
             bookRepository.save(buildBookToSave(previousBook, book))
         } else {
-            throw Exception("Book id was not found on DB")
+            throw ElementNotFoundException(ErrorCode.M0101.message, ErrorCode.M0101.errorCode)
         }
     }
 
@@ -55,7 +54,7 @@ class BookService(
             book?.status = BookStatus.DELETED
             bookRepository.save(book!!)
         } else {
-            throw Exception("Book id was not found on DB")
+            throw ElementNotFoundException(ErrorCode.M0101.message, ErrorCode.M0101.errorCode)
         }
     }
 

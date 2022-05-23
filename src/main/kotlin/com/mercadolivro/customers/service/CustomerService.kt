@@ -4,9 +4,9 @@ import com.mercadolivro.books.service.BookService
 import com.mercadolivro.customers.Customer
 import com.mercadolivro.customers.enums.CustomerStatus
 import com.mercadolivro.customers.repository.CustomerRepository
-import org.springframework.data.repository.findByIdOrNull
+import com.mercadolivro.enums.ErrorCode
+import com.mercadolivro.exceptions.ElementNotFoundException
 import org.springframework.stereotype.Service
-import javax.persistence.Id
 
 @Service
 class CustomerService(
@@ -23,11 +23,8 @@ class CustomerService(
     }
 
     fun getCustomerById(id: Int) : Customer {
-        val customer = customerRepository.findByIdOrNull(id = id.toInt())
-        if(customer != null) {
-            return customer
-        } else {
-            throw Exception("Customer not found by informed id")
+        return customerRepository.findById(id).orElseThrow{
+            ElementNotFoundException(message = ErrorCode.M0001.message, errorCode = ErrorCode.M0001.errorCode)
         }
     }
 
@@ -40,7 +37,7 @@ class CustomerService(
             val previousCustomer = getCustomerById(id.toInt())
             customerRepository.save(buildCustomerToSave(previousCustomer, customer))
         } else {
-            throw Exception("Customer not found by informed id")
+            throw ElementNotFoundException(message = ErrorCode.M0001.message, errorCode = ErrorCode.M0001.errorCode)
         }
     }
 
@@ -51,7 +48,7 @@ class CustomerService(
             deletedAllCustomersBooks(customer.id!!)
             customerRepository.save(customer)
         } else {
-            throw Exception("Customer not found by informed id")
+            throw ElementNotFoundException(message = ErrorCode.M0001.message, errorCode = ErrorCode.M0001.errorCode)
         }
     }
 

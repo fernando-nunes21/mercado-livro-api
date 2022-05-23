@@ -18,13 +18,27 @@ data class Book(
     @Column
     var price: BigDecimal?,
 
-    @Column
-    @Enumerated(EnumType.STRING)
-    var status: BookStatus? = null,
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
     var customer: Customer? = null
 
 ) {
+    @Column
+    @Enumerated(EnumType.STRING)
+    var status: BookStatus? = null
+        set(value) {
+            if(field == BookStatus.DELETED || field == BookStatus.CANCELED)
+                throw Exception("Can't alter status of a DELETED or CANCELED book")
+            field = value
+        }
+
+    constructor(
+        id: Int? = null,
+        name: String?,
+        price: BigDecimal?,
+        status: BookStatus?,
+        customer: Customer? = null) : this(id,name,price,customer) {
+            this.status = status
+        }
 }
