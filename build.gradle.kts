@@ -24,7 +24,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-validation:2.7.0")
 	implementation("org.flywaydb:flyway-core:8.5.11")
-	implementation ("org.flywaydb:flyway-mysql:8.5.10")
+	implementation("org.flywaydb:flyway-mysql:8.5.10")
+	implementation("io.springfox:springfox-swagger2:2.9.2")
+	implementation("io.springfox:springfox-swagger-ui:2.9.2")
 	runtimeOnly("mysql:mysql-connector-java")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

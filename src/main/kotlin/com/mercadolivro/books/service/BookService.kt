@@ -3,8 +3,8 @@ package com.mercadolivro.books.service
 import com.mercadolivro.books.Book
 import com.mercadolivro.books.enums.BookStatus
 import com.mercadolivro.books.repository.BookRepository
-import com.mercadolivro.enums.ErrorCode
-import com.mercadolivro.exceptions.ElementNotFoundException
+import com.mercadolivro.generic.enums.ErrorCode
+import com.mercadolivro.generic.exceptions.ElementNotFoundException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 

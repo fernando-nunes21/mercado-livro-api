@@ -5,8 +5,8 @@ import com.mercadolivro.books.extension.toBook
 import com.mercadolivro.books.extension.toResponse
 import com.mercadolivro.books.service.BookService
 import com.mercadolivro.customers.Customer
-import com.mercadolivro.customers.controller.request.PostBookRequest
-import com.mercadolivro.customers.controller.request.PutBookRequest
+import com.mercadolivro.books.controller.request.PostBookRequest
+import com.mercadolivro.books.controller.request.PutBookRequest
 import com.mercadolivro.customers.service.CustomerService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

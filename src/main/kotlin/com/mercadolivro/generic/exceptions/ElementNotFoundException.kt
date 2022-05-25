@@ -1,4 +1,4 @@
-package com.mercadolivro.exceptions
+package com.mercadolivro.generic.exceptions
 
 class ElementNotFoundException(override var message : String, var errorCode: String) : Exception() {
 

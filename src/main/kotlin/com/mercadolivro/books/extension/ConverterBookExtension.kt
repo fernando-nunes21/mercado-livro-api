@@ -4,8 +4,8 @@ import com.mercadolivro.books.Book
 import com.mercadolivro.books.controller.response.BookResponse
 import com.mercadolivro.books.enums.BookStatus
 import com.mercadolivro.customers.Customer
-import com.mercadolivro.customers.controller.request.PostBookRequest
-import com.mercadolivro.customers.controller.request.PutBookRequest
+import com.mercadolivro.books.controller.request.PostBookRequest
+import com.mercadolivro.books.controller.request.PutBookRequest
 
 
 fun PostBookRequest.toBook(customer : Customer) : Book {

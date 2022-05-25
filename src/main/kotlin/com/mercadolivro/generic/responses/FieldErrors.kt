@@ -1,4 +1,4 @@
-package com.mercadolivro.responses
+package com.mercadolivro.generic.responses
 
 data class FieldErrors(
     var field: String,

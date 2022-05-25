@@ -1,4 +1,4 @@
-package com.mercadolivro.enums
+package com.mercadolivro.generic.enums
 
 enum class ErrorCode(var message: String, var errorCode: String) {
 

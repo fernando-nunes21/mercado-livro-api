@@ -1,6 +1,5 @@
 package com.mercadolivro.customers.controller
 
-import com.mercadolivro.customers.Customer
 import com.mercadolivro.customers.controller.request.PostCustomerRequest
 import com.mercadolivro.customers.controller.request.PutCustomerRequest
 import com.mercadolivro.customers.controller.response.CustomerResponse

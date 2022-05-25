@@ -4,8 +4,8 @@ import com.mercadolivro.books.service.BookService
 import com.mercadolivro.customers.Customer
 import com.mercadolivro.customers.enums.CustomerStatus
 import com.mercadolivro.customers.repository.CustomerRepository
-import com.mercadolivro.enums.ErrorCode
-import com.mercadolivro.exceptions.ElementNotFoundException
+import com.mercadolivro.generic.enums.ErrorCode
+import com.mercadolivro.generic.exceptions.ElementNotFoundException
 import org.springframework.stereotype.Service
 
 @Service
