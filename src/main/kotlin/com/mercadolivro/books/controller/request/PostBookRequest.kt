@@ -10,7 +10,7 @@ data class PostBookRequest(
     @field:NotEmpty
     var name: String,
 
-    @field:NotEmpty
+    @field:NotNull
     var price: BigDecimal,
 
     @field:NotNull

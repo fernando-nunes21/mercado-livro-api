@@ -18,4 +18,6 @@ interface BookRepository : CrudRepository<Book, Int> {
     @Query(value="SELECT * FROM Books WHERE customer_id = ?1", nativeQuery = true)
     fun findAllBooksByCustomerId(customerId: Int) : List<Book>
 
+    @Query(value="SELECT * FROM Books WHERE id in (?1)", nativeQuery = true)
+    fun getAllBooksByIds(booksIds : List<Int>) : List<Book>
 }

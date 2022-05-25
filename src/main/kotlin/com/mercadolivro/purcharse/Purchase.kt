@@ -1,7 +1,7 @@
 package com.mercadolivro.purcharse
 
+import com.mercadolivro.books.Book
 import com.mercadolivro.customers.Customer
-import java.awt.print.Book
 import java.math.BigDecimal
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -25,9 +25,14 @@ data class Purchase(
     )
     var books : List<Book>,
 
-    var nfe : String,
-    var priceTotal: BigDecimal,
-    var createdAt: LocalDateTime
+    @Column
+    var nfe : String? = null,
+
+    @Column
+    var priceTotal: BigDecimal?,
+
+    @Column(name = "created_at")
+    var createdAt: LocalDateTime = LocalDateTime.now()
 
     ) {
 }

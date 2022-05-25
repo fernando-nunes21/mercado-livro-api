@@ -35,6 +35,10 @@ class BookService(
         return bookRepository.findAllBooksByCustomerId(customerId)
     }
 
+    fun getAllBooksByIds(booksIds : List<Int>) : List<Book> {
+        return bookRepository.getAllBooksByIds(booksIds)
+    }
+
     fun createBook(book : Book) {
         bookRepository.save(book)
     }
@@ -55,6 +59,13 @@ class BookService(
             bookRepository.save(book!!)
         } else {
             throw ElementNotFoundException(ErrorCode.M0101.message, ErrorCode.M0101.errorCode)
+        }
+    }
+
+    fun updatePurchaseBook(books : List<Book>) {
+        books.forEach{
+            it.status = BookStatus.SOLD
+            bookRepository.save(it)
         }
     }
 
