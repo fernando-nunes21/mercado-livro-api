@@ -70,4 +70,16 @@ class ControllerAdvice {
 
         return ResponseEntity(errorResponse, HttpStatus.UNPROCESSABLE_ENTITY)
     }
+
+    @ExceptionHandler(ElementStatusException::class)
+    fun handlerElementStatusException(ex: ElementStatusException, request: WebRequest) : ResponseEntity<ErrorResponse> {
+        var errorResponse = ErrorResponse(
+            statusCode = HttpStatus.BAD_REQUEST.value(),
+            message = ex.message,
+            errorCode = ErrorCode.M0000.errorCode,
+            errors = null
+        )
+
+        return ResponseEntity(errorResponse, HttpStatus.BAD_REQUEST)
+    }
 }
