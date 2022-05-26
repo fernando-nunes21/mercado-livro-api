@@ -16,8 +16,8 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/v1/books")
 class BookController(
-    val bookService: BookService,
-    val customerService: CustomerService
+    private val bookService: BookService,
+    private val customerService: CustomerService
 ) {
 
     @GetMapping

@@ -3,15 +3,18 @@ package com.mercadolivro.customers.service
 import com.mercadolivro.books.service.BookService
 import com.mercadolivro.customers.Customer
 import com.mercadolivro.customers.enums.CustomerStatus
+import com.mercadolivro.customers.enums.Profile
 import com.mercadolivro.customers.repository.CustomerRepository
 import com.mercadolivro.generic.enums.ErrorCode
 import com.mercadolivro.generic.exceptions.ElementNotFoundException
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
 class CustomerService(
-    val customerRepository: CustomerRepository,
-    val bookService: BookService
+    private val customerRepository: CustomerRepository,
+    private val bookService: BookService,
+    private val bCryptPasswordEncoder: BCryptPasswordEncoder
 ) {
 
     fun getCustomers(name: String?, offset: Int, limit: Int) : List<Customer> {
@@ -29,7 +32,11 @@ class CustomerService(
     }
 
     fun createCustomer(customer : Customer) {
-        customerRepository.save(customer)
+        val customerToSave = customer.copy(
+            role = setOf(Profile.CUSTOMER),
+            password = bCryptPasswordEncoder.encode(customer.password)
+        )
+        customerRepository.save(customerToSave)
     }
 
     fun editCustomer(id : String, customer : Customer){
@@ -59,7 +66,8 @@ class CustomerService(
             age = newCustomer.age ?: previousCustomer.age,
             email = newCustomer.email ?: previousCustomer.email,
             location = newCustomer.location ?: previousCustomer.location,
-            paymentType = newCustomer.paymentType ?: previousCustomer.paymentType
+            paymentType = newCustomer.paymentType ?: previousCustomer.paymentType,
+            password = previousCustomer.password
         )
     }
 

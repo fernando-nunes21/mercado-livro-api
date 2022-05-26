@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class BookService(
-    val bookRepository: BookRepository
+   private val bookRepository: BookRepository
 ) {
 
     fun getAllBooks(name : String?, limit: Int, offset: Int) : List<Book> {

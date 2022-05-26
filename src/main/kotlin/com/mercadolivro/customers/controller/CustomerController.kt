@@ -22,7 +22,7 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("v1/customers")
 class CustomerController(
-    val customerService: CustomerService
+    private val customerService: CustomerService
 ) {
 
     @GetMapping
@@ -47,7 +47,7 @@ class CustomerController(
 
     @PutMapping("/{id}")
     fun editCustomer(@PathVariable id : String, @RequestBody @Valid request: PutCustomerRequest) : ResponseEntity<Any> {
-        customerService.editCustomer(id, request.toCustomer())
+        customerService.editCustomer(id, request.toCustomer(customerService.getCustomerById(id.toInt())))
         return ResponseEntity(HttpStatus.NO_CONTENT)
     }
 

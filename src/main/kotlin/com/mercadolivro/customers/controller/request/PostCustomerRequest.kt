@@ -26,6 +26,10 @@ data class PostCustomerRequest(
 
     @field:NotEmpty
     @JsonProperty("payment_type")
-    var paymentType : String
+    var paymentType : String,
+
+    @field:NotEmpty
+    var password: String
+
 ) {
 }

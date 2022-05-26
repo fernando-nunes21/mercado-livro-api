@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/v1/purchase")
 class PurchaseController(
-    val purchaseMapper: PurchaseMapper,
-    val purchaseService: PurchaseService
+    private val purchaseMapper: PurchaseMapper,
+    private val purchaseService: PurchaseService
 ) {
 
     @GetMapping("/customer/{customerId}")

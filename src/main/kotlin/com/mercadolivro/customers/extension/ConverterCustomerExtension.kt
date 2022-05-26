@@ -13,18 +13,20 @@ fun PostCustomerRequest.toCustomer() : Customer {
         email = email,
         location = location,
         paymentType = paymentType,
-        status = CustomerStatus.ACTIVE
+        status = CustomerStatus.ACTIVE,
+        password = password
     )
 }
 
-fun PutCustomerRequest.toCustomer() : Customer {
+fun PutCustomerRequest.toCustomer(previousCustomer: Customer) : Customer {
     return Customer(
         name = name,
         age = age,
         email = email,
         location = location,
         paymentType = paymentType,
-        status = status
+        status = status,
+        password = previousCustomer.password
     )
 }
 

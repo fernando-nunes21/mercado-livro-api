@@ -27,5 +27,6 @@ data class PutCustomerRequest(
 
     @field:NotEmpty
     var status : CustomerStatus
+
 ) {
 }
